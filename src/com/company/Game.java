@@ -20,10 +20,11 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     private int ballPosY = 350;
     private int ballXDir = -1;
     private int ballYDir = -2;
-
+    private int level = 1;
     private Map map;
 
     public Game(){
+                initializeLevel();
         map = new Map(4, 7);
         addKeyListener(this);
         setFocusable(true);
@@ -32,7 +33,17 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         timer.start();
     }
 
-
+    private void initializeLevel() {
+        map = new Map(3 + level, 7);
+        totalBricks = (3 + level) * 7;
+        ballPosX = 120;
+        ballPosY = 350;
+        ballXDir = -1;
+        ballYDir = -2;
+        playerPos = 310;
+        play = true;
+        repaint();
+    }
     public void paint(Graphics g){
         //background
         g.setColor(Color.white);
@@ -118,6 +129,16 @@ public class Game extends JPanel implements KeyListener, ActionListener {
                     }
                 }
             }
+            if (totalBricks <= 0) {
+                level++;
+                initializeLevel();
+            }
+
+            if (ballPosY > 570) {
+                play = false;
+                ballXDir = 0;
+                ballYDir = 0;
+                }
             ballPosX += 2 * ballXDir;
             ballPosY += 2 * ballYDir;
             if(ballPosX < 0){
@@ -158,17 +179,19 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         }
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             if (!play){
-                play = true;
-                ballPosX = 120;
-                ballPosY = 350;
-                ballXDir = -1;
-                ballYDir = -2;
-                playerPos = 310;
-                score = 0;
-                totalBricks = 28;
-                map = new Map(3, 7);
-
-                repaint();
+                level = 1;
+                initializeLevel();
+//                play = true;
+//                ballPosX = 120;
+//                ballPosY = 350;
+//                ballXDir = -1;
+//                ballYDir = -2;
+//                playerPos = 310;
+//                score = 0;
+//                totalBricks = 28;
+//                map = new Map(3, 7);
+//
+//                repaint();
             }
         }
     }
