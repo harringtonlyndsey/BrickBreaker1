@@ -31,7 +31,7 @@ public class PowerUp {
         color = FASTCOLOR;
     }
     dy = (int)(Math.random() * 6 + 1);
-    }
+      }
     public void draw(Graphics2D g){
     g.setColor(color);
     g.fillRect(x, y, width, height);

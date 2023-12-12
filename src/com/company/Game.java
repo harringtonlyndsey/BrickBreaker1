@@ -24,7 +24,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     private Map map;
 
     public Game(){
-                initializeLevel();
+        initializeLevel();
         map = new Map(4, 7);
         addKeyListener(this);
         setFocusable(true);
@@ -42,6 +42,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         ballYDir = -2;
         playerPos = 310;
         play = true;
+        score = 0;
         repaint();
     }
     public void paint(Graphics g){
